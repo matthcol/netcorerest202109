@@ -3,10 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WineApiRest.Model;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace WineApiRest
+namespace WineApiRest.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -14,17 +15,41 @@ namespace WineApiRest
     {
         // GET: api/<WineController>
         [HttpGet]
-        public IEnumerable<string> GetAllWines()
+        public IEnumerable<Wine> GetAllWines()
         {
-            return new string[] { "beaujolais", "jurançon", "madiran" };
+            return new Wine[] {
+                new Wine
+                {
+                    Id = 1,
+                    Appellation = "Beaujolais",
+                    Color = WineColor.ROUGE,
+                    Vintage = 2021,
+                    AlcoholRate = 12.5f
+                },
+                    new Wine
+                {
+                    Id = 2,
+                    Appellation = "Jurançon",
+                    Color = WineColor.BLANC,
+                    Vintage = 2015,
+                    AlcoholRate = 11.5f
+                }
+            };
         }
 
         // GET api/<WineController>/5
-        [HttpGet("{id:int}")]
-        public string GetWineById([FromRoute] int id)
+        [HttpGet("{id:long}")]
+        public Wine GetWineById([FromRoute] uint id)
         // public string GetWineById(int id)
         {
-            return $"value {id}";
+            return new Wine
+            {
+                Id = id,
+                Appellation = "Beaujolais",
+                Color = WineColor.ROUGE,
+                Vintage = 2021,
+                AlcoholRate = 12.5f
+            };
         }
 
         // GET /api/<WineController>/rouge
@@ -44,8 +69,8 @@ namespace WineApiRest
                 String.Format("vin 2 de {0}", region)};
         }
 
-        // GET api/wine<WineController>/byRegionCouleurDegreMillesime?r=Beaujolais&c=rouge&d=12.4
-        // GET api/wine<WineController>/byRegionCouleurDegreMillesime?m=2015-09-22T12:34
+        // GET api/<WineController>/byRegionCouleurDegreMillesime?r=Beaujolais&c=rouge&d=12.4
+        // GET api/<WineController>/byRegionCouleurDegreMillesime?m=2015-09-22T12:34
         // recherche par région, couleur, dégré
         [HttpGet("byRegionCouleurDegreMillesime")]
         public IEnumerable<string> GetByRegionCouleurDegre(
@@ -60,12 +85,25 @@ namespace WineApiRest
             };
         }
 
+        // GET api/<WineController>/IsForAging-12
+        [HttpGet("IsForAging-{id:long}")]
+        // public bool IsForAging([FromRoute] uint id)
+        public bool IsForAging(uint id)
+        {
+            return id %2 == 0;
+        }
+
         // POST api/<WineController>
         [HttpPost]
         // public string Post([FromQuery(Name = "v")] string value)
-        public string Post([FromBody] string value)
+        // public string Post([FromBody] string value)
+        // public Wine Post(Wine wine)
+        public Wine Post([FromBody] Wine wine)
         {
-            return $"{value} added with id 12356";
+            // return $"{value} added with id 12356";
+            // TODO : persist object in Database
+            // wine.Id = 12356;
+            return wine;
         }
 
         // PUT api/<WineController>/5

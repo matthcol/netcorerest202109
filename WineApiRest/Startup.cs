@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace WineApiRest
@@ -26,6 +27,11 @@ namespace WineApiRest
             // services.AddRazorPages();
             // services.AddMvc();
             services.AddControllers();
+                 //.AddJsonOptions(opts =>
+                 //{
+                 //    var enumConverter = new JsonStringEnumConverter();
+                 //    opts.JsonSerializerOptions.Converters.Add(enumConverter);
+                 //});
             services.AddSwaggerGen();
         }
 
