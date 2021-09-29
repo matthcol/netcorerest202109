@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31702.278
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WineApiRestDbr", "WineApiRestDbr.csproj", "{8EE64E6C-8E85-4A94-A059-3405B59ECCF7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WineApiRestDbr", "WineApiRestDbr.csproj", "{8EE64E6C-8E85-4A94-A059-3405B59ECCF7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWineApi", "..\TestWineApi\TestWineApi.csproj", "{A8A4D15B-AF82-4480-B845-A7580C431BB0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{8EE64E6C-8E85-4A94-A059-3405B59ECCF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8EE64E6C-8E85-4A94-A059-3405B59ECCF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8EE64E6C-8E85-4A94-A059-3405B59ECCF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8A4D15B-AF82-4480-B845-A7580C431BB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8A4D15B-AF82-4480-B845-A7580C431BB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8A4D15B-AF82-4480-B845-A7580C431BB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8A4D15B-AF82-4480-B845-A7580C431BB0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
