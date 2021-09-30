@@ -46,8 +46,8 @@ namespace WineApiRestDbr.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Wine>> GetWine(uint? id)
         {
-           var wine = await _context.Wines.FindAsync(id);
-
+            var wine = await _context.Wines.FindAsync(id);
+            _logger.LogDebug($"Wine found #{id} : {wine}");
             if (wine == null)
             {
                 return NotFound();
