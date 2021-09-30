@@ -8,9 +8,16 @@ namespace WineApiRest.Services
 {
     public class WineService : IWineService
     {
+        private readonly WineDbContext _context;
+
+        public WineService(WineDbContext context)
+        {
+            _context = context;
+        }
+
         public async Task<Wine> GetWine(uint id)
         {
-            throw new NotImplementedException();
+            return  await _context.Wines.FindAsync(id);
         }
     }
 }
