@@ -31,23 +31,40 @@ namespace TestWineApi.Model
                 {
                     Id = 1,
                     Appellation = "Beaujolais",
+                    Color = WineColor.ROSE,
                     Vintage = 2020
                 };
                 var two = new Wine
                 {
                     Id = 2,
                     Appellation = "Nuit Saint Georges",
+                    Color = WineColor.ROUGE,
                     Vintage = 2016
                 };
                 var three = new Wine
                 {
                     Id = 3,
                     Appellation = "Pommard",
-                    Vintage = 2000
+                    Color = WineColor.ROUGE,
+                    Vintage = 2000,
                 };
 
-                context.AddRange(one, two, three);
+                var drinker1 = new Drinker
+                {
+                    Name = "Matthias",
+                    PreferredWine = two,
+                    PreferredWineId = two.Id
+                };
 
+                var drinker2 = new Drinker
+                {
+                    Name = "Olivier",
+                    PreferredWine = three,
+                    PreferredWineId = three.Id
+                };
+
+                context.AddRange(one, two, three,
+                    drinker1, drinker2);
                 context.SaveChanges();
             }
         }

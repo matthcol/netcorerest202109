@@ -23,5 +23,6 @@ namespace WineApiRest.Model
 
         [JsonIgnore]
         public float? AlcoholRate { get; set; }
+
     }
 }

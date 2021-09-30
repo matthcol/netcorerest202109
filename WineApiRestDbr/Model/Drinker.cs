@@ -18,5 +18,8 @@ namespace WineApiRest.Model
         [JsonConverter(typeof(DateConverter))]
         [DataType(DataType.Date)]
         public DateTime Birthdate { get; set; }
+
+        public Wine PreferredWine { get; set; }
+        public uint? PreferredWineId { get; set; }
     }
 }

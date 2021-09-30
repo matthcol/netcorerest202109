@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WineApiRest.Dto;
 using WineApiRest.Model;
 using Xunit;
 
@@ -95,5 +96,73 @@ namespace TestWineApi.Model
                     .ToList();
             }
         }
+
+        [Fact]
+        public void test_query_projection2fields_anonymousDto()
+        {
+            using (var context = new WineDbContext(ContextOptions))
+            {
+                // select Appellation, Couleur from Wines
+                var res = context.Wines
+                    .Select(w => new
+                        {
+                            Appellation = w.Appellation,
+                            Color = w.Color
+                        })
+                    .ToList();        
+            }
+        }
+
+        [Fact]
+        public void test_query_projection2fields_Dto()
+        {
+            using (var context = new WineDbContext(ContextOptions))
+            {
+                // select Appellation, Couleur from Wines
+                var res = context.Wines
+                    .Select(w => new AppellationColor
+                        {
+                            Appellation = w.Appellation,
+                            Color = w.Color
+                        })
+                    .ToList();
+            }
+        }
+
+        [Fact]
+        public void test_query_groupby()
+        {
+            using (var context = new WineDbContext(ContextOptions))
+            {
+                context.AddRange(
+                    new Wine
+                    {
+                        Appellation = "Saint Emilion",
+                        Color = WineColor.ROUGE,
+                        Vintage = 1948
+                    }, 
+                    new Wine
+                    {
+                        Appellation = "Jurançon",
+                        Color = WineColor.BLANC,
+                        Vintage = 2015
+                    }
+                );
+                context.SaveChanges();
+                var res = context.Wines
+                    .GroupBy(
+                        w => w.Color, // key groupby
+                        w => w.Vintage, // property for computings statistics
+                        (color, vintages) => new
+                        {
+                            Color = color,
+                            Count = vintages.Count(),
+                            VintageMin = vintages.Min(),
+                            VintageMax = vintages.Max()
+                        })
+                    .ToList();
+            }
+        }
+
     }
 }

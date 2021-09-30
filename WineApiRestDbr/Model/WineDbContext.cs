@@ -15,5 +15,7 @@ namespace WineApiRest.Model
         }
 
         public DbSet<Wine> Wines { get; set; }
+
+        public DbSet<Drinker> Drinkers { get; set; }
     }
 }
