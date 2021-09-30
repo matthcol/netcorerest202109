@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WineApiRest.Model;
+using WineApiRest.Services;
 
 namespace WineApiRestDbr
 {
@@ -32,7 +33,7 @@ namespace WineApiRestDbr
             services.AddControllers();
             services.AddDbContext<WineDbContext>(opt =>
                                                opt.UseInMemoryDatabase("WineDb"));
-            // services.AddScoped<ILogger, Logger>();
+            services.AddScoped<IWineService, WineService>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WineApiRestDbr", Version = "v1" });

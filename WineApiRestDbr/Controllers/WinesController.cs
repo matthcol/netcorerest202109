@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using WineApiRest.Dto;
 using WineApiRest.Model;
+using WineApiRest.Services;
 
 namespace WineApiRestDbr.Controllers
 {
@@ -17,9 +18,12 @@ namespace WineApiRestDbr.Controllers
     {
         private readonly WineDbContext _context;
         private readonly ILogger<WinesController> _logger;
+        private readonly IWineService _wineService;
 
-        public WinesController(WineDbContext context, ILogger<WinesController> logger)
+        public WinesController(
+            IWineService wineService, WineDbContext context, ILogger<WinesController> logger)
         {
+            _wineService = wineService;
             _context = context;
             _logger = logger;
         }
@@ -44,9 +48,10 @@ namespace WineApiRestDbr.Controllers
 
         // GET: api/Wines/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Wine>> GetWine(uint? id)
+        public async Task<ActionResult<Wine>> GetWine(uint id)
         {
-            var wine = await _context.Wines.FindAsync(id);
+            // var wine = await _context.Wines.FindAsync(id);
+            var wine = await _wineService.GetWine(id);
             _logger.LogDebug($"Wine found #{id} : {wine}");
             if (wine == null)
             {

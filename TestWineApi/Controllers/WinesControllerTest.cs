@@ -32,7 +32,7 @@ namespace TestWineApi.Controllers
             using (var context = new WineDbContext(ContextOptions))
             {
                 ILogger<WinesController> logger = null;
-                var wineController = new WinesController(context, _mockLogger.Object);
+                var wineController = new WinesController(null, context, _mockLogger.Object);
                 var id = (uint) 0;
                 
                 var actionResult = await wineController.GetWine(id);
@@ -49,7 +49,7 @@ namespace TestWineApi.Controllers
         {
             using (var context = new WineDbContext(ContextOptions))
             {
-                var wineController = new WinesController(context, _mockLogger.Object);
+                var wineController = new WinesController(null, context, _mockLogger.Object);
                 var id = (uint)1;
 
                 var actionResult = await wineController.GetWine(id);
