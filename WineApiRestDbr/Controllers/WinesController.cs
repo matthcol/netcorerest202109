@@ -37,7 +37,8 @@ namespace WineApiRestDbr.Controllers
         {
             // _logger.LogDebug("Demande de la carte des vins");
             // SQL : select * from Wines;
-            return _context.Wines.ToList();
+            return _context.Wines
+                .ToList();
         }
 
         // GET: api/Wines/5
