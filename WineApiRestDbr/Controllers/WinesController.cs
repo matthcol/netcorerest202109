@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using WineApiRest.Dto;
 using WineApiRest.Model;
 
 namespace WineApiRestDbr.Controllers
@@ -105,7 +106,17 @@ namespace WineApiRestDbr.Controllers
             return res ?? defaultWine;
         }
 
-
+        // GET: api/Wines
+        [HttpGet("AppellationColor")]
+        public async Task<ActionResult<IEnumerable<AppellationColor>>> GetAppellattionColor()
+        {
+            return await _context.Wines
+                    .Select(w => new AppellationColor
+                    {
+                        Appellation = w.Appellation,
+                        Color = w.Color
+                    }).ToListAsync();
+        }
 
         // PUT: api/Wines/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
